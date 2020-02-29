@@ -1,0 +1,33 @@
+{
+  "name": "node_trial",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "@vue/cli": "^4.2.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "vuetify": "^2.2.11"
+  },
+  "devDependencies": {
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.0",
+    "vue-cli-plugin-vuetify": "~2.0.5",
+    "vuetify-loader": "^1.3.0"
+  },
+  "bugs": {
+    "url": "https://github.com/migz00/node_trial/issues"
+  },
+  "homepage": "https://github.com/migz00/node_trial#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/migz00/node_trial.git"
+  }
+}
