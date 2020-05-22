@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./data-bank-nia-firebase-adminsdk-7qsf0-f34e62b0fc.json");
+var serviceAccount = require("./api/data-bank-nia-firebase-adminsdk-7qsf0-f34e62b0fc.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -22,9 +22,9 @@ app.use(bodyParser.json());
 
 if(process.env.NODE_ENV === 'production'){
 
-    app.use(express.static(__dirname + './public/'));
+    app.use(express.static(__dirname + '/public/'));
 
-    app.get(/.*/, (req, res) => res.sendFile(__dirname + './public/index.html'));
+    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
 }
  
 app.get('/api', async (req, res) => {
