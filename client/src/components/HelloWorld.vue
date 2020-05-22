@@ -5,6 +5,7 @@
         <v-card flat>
           <v-row cols="12">
             <v-col cols="5"> <v-card-title class="headline"> Cloud Storage </v-card-title> </v-col>
+            <v-spacer></v-spacer>
             <v-col cols="3" class="mr-4">
               <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
@@ -63,7 +64,7 @@
                         tile
                         >
                           <v-img
-                          :src="item.src"
+                          src='..\assets\folder-icon.png'
                           contain></v-img>
                         </v-avatar>
                       </div>
@@ -94,13 +95,16 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+var bingka = '/api';
+
 export default {
   name: 'HelloWorld',
 
   data: () => ({
     dialog: false,
     editedIndex: -1,
-    items: [
+    items: [ {name: "1", src: "..\assets\folder-icon.png", artist: "0 documents"},
     ],
 
     items2: [
@@ -121,6 +125,20 @@ export default {
     },
   },
 
+  async created() {
+    var item = this.items;
+    await fetch(bingka)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(myJson) {
+      //console.log(myJson);
+      item = myJson
+    });
+    this.items = item
+    console.log(item)
+  },
+
   methods: {
     close() {
       this.dialog = false;
@@ -128,53 +146,27 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       }, 300);
+
     },
 
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.items[this.editedIndex], this.editedItem);
       } else {
-        db.collection('folders').doc(this.editedItem.name).set({
-          name: this.editedItem.name,
-        })
-          .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        });
+        // firebase.firestore().collection('folders').doc(this.editedItem.name).set({
+        //   name: this.editedItem.name,
+        // })
+        //   .then(function() {
+        //   console.log("Document successfully written!");
+        // })
+        // .catch(function(error) {
+        //   console.error("Error writing document: ", error);
+        // });
         }
       this.close()
     },
   },
 };
-var firebaseConfig = {
-          apiKey: "AIzaSyDierVYyjrZIoqMh7qY3JiHL1XNY7zjV2Y",
-          authDomain: "data-bank-nia.firebaseapp.com",
-          databaseURL: "https://data-bank-nia.firebaseio.com",
-          projectId: "data-bank-nia",
-          storageBucket: "data-bank-nia.appspot.com",
-          messagingSenderId: "551196353265",
-          appId: "1:551196353265:web:8aa98b78f9ad351d167f50"
-          };
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-          var db = firebase.firestore();
-          var storageRef = firebase.storage().ref();
-          console.log("agi1");    
-          
-   db.collection("folders").onSnapshot(function(querySnapshot) {
-      var count = 0;
-      var items = [];
-      querySnapshot.forEach(function(doc) {
-        var data = doc.data();
-        data.src = 'folder-icon.png';
-        data.artist = '0 documents';
-        data.color = '#FFFFFF';
-        items.push(data);
-        count++;
-      });
-      console.log(items);
-  });
+
 
 </script>
