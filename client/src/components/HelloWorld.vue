@@ -97,6 +97,7 @@
 <script>
 import firebase from 'firebase';
 var bingka = 'api/';
+var insert = 'insert/';
 
 export default {
   name: 'HelloWorld',
@@ -150,19 +151,31 @@ export default {
 
     },
 
-    save() {
+    async save() {
       if (this.editedIndex > -1) {
+        console.log('insert2')
         Object.assign(this.items[this.editedIndex], this.editedItem);
       } else {
-        // firebase.firestore().collection('folders').doc(this.editedItem.name).set({
-        //   name: this.editedItem.name,
-        // })
-        //   .then(function() {
-        //   console.log("Document successfully written!");
-        // })
-        // .catch(function(error) {
-        //   console.error("Error writing document: ", error);
-        // });
+        console.log('insert')
+        var item = this.editedItem;
+        await fetch(insert, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: JSON.stringify(item)
+        })
+        .then(function(response) {
+          console.log('agi1');
+          return response.json();
+        })
+        .then(function(myJson) {
+          console.log(myJson);
+          item = myJson
+        });
+        this.items = item
+        console.log(item)
         }
       this.close()
     },

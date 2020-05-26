@@ -25,7 +25,17 @@ app.get('/api', async (req, res) => {
     res.send( await items );
 });
 
-app.post('/', async (req, res) => {
+app.post('/insert', async (req, res) => {
+    // firebase.firestore().collection('folders').doc(this.editedItem.name).set({
+    //     name: this.editedItem.name,
+    // })
+    // .then(function() {
+    //     console.log("Document successfully written!");
+    // })
+    // .catch(function(error) {
+    //     console.error("Error writing document: ", error);
+    // });
+    const ins = await insertFolders(req.body);
     const items = await getFolders();
     res.send( await items );
 });
@@ -42,13 +52,20 @@ async function getFolders(){
             data.color = '#FFFFFF';
             items.push(data);
         });
-        
+        console.log('document get!');
     })
     .catch(err => {
         console.log('Error getting documents', err);
     });
     await allCities;
     return items;
+}
+
+async function insertFolders(folder){
+    let data = folder;
+    let setDoc = db.collection('folders').doc(data.name).set(data);
+    await setDoc;
+    return true;
 }
 
 if(process.env.NODE_ENV === 'production'){

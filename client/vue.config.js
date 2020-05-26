@@ -9,6 +9,9 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://localhost:4000'
+      },
+      '/insert': {
+        target: 'http://localhost:4000'
       }
     }
   }
