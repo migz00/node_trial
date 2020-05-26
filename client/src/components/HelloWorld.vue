@@ -96,7 +96,7 @@
 
 <script>
 import firebase from 'firebase';
-var bingka = '/api';
+var bingka = 'api/';
 
 export default {
   name: 'HelloWorld',
