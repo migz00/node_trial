@@ -129,10 +129,11 @@ export default {
     var item = this.items;
     await fetch(bingka)
     .then(function(response) {
+      console.log('agi1');
       return response.json();
     })
     .then(function(myJson) {
-      //console.log(myJson);
+      console.log(myJson);
       item = myJson
     });
     this.items = item
