@@ -8,11 +8,12 @@ var serviceAccount = require("./api/data-bank-nia-firebase-adminsdk-7qsf0-f34e62
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://data-bank-nia.firebaseio.com"
+  databaseURL: "https://data-bank-nia.firebaseio.com",
+  storageBucket: "data-bank-nia.appspot.com"
 });
 
-
 let db = admin.firestore();
+let bucket = admin.storage().bucket();
 
 const app = express();
  

@@ -76,11 +76,11 @@
                 </template>
                 <v-list>
                   <v-list-item
-                  v-for="(item, index) in items2"
+                  v-for="(it, index) in items2"
                   :key="index"
                   dense
                   >
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    <router-link :to="item.name"> {{ it.title }} </router-link>
                   </v-list-item>
                 </v-list>
               </v-menu>
@@ -105,11 +105,11 @@ export default {
   data: () => ({
     dialog: false,
     editedIndex: -1,
-    items: [ {name: "1", src: "..\assets\folder-icon.png", artist: "0 documents"},
+    items: [
     ],
 
     items2: [
-      { title: 'Open Folder' },
+      { title: 'Open Folder'},
       { title: 'Rename Folder' },
     ],
     editedItem: {
