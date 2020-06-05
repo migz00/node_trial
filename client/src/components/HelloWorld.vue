@@ -105,7 +105,7 @@ export default {
   data: () => ({
     dialog: false,
     editedIndex: -1,
-    items: [
+    items: [ {name:'1'}
     ],
 
     items2: [

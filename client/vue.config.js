@@ -12,6 +12,12 @@ module.exports = {
       },
       '/insert': {
         target: 'http://localhost:4000'
+      },
+      '/upload': {
+        target: 'http://localhost:4000'
+      },
+      '/documents': {
+        target: 'http://localhost:4000'
       }
     }
   }
